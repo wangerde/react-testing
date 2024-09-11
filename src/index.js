@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+// src/index.js
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import NewCustomization from './Customization/NewCustomization';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+function MainApp() {
+  // State to hold customization groups
+  const [customizationGroups, setCustomizationGroups] = useState([]);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  // Function to handle saving a new group
+  const handleSaveGroup = (newGroup) => {
+    // Add the new group to the list
+    setCustomizationGroups([...customizationGroups, newGroup]);
+  };
+
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Pass the groups and the save handler to the appropriate components */}
+        <Route path="/" element={<App customizationGroups={customizationGroups} />} />
+        <Route path="/new-customization" element={<NewCustomization onSave={handleSaveGroup} />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+ReactDOM.render(<MainApp />, document.getElementById('root'));
