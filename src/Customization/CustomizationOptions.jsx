@@ -8,8 +8,8 @@ const CustomizationOptions = ({ options }) => {
       {options.map((option, index) => (
         <Card key={index} style={{ margin: '10px 0' }}>
           <CardContent>
-            <Typography variant="subtitle1">{option.label}</Typography>
-            <Typography variant="body2">${option.price}</Typography>
+            <Typography variant="subtitle1">{option.optionName}</Typography>
+            <Typography variant="body2">${option.optionPrice}</Typography>
           </CardContent>
         </Card>
       ))}
